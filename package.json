@@ -1,0 +1,27 @@
+{
+  "name": "el-rio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A teaching game on the climate, land, energy and water (CLEW) nexus: why planning in silos mismanages shared resources.",
+  "license": "GPL-3.0-only",
+  "author": "Vignesh Sridharan",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "calibrate": "node --experimental-strip-types scripts/calibrate.ts"
+  },
+  "dependencies": {
+    "@fontsource-variable/archivo": "5.3.0",
+    "@fontsource-variable/public-sans": "5.3.0",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "preact": "10.29.8"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "vite": "8.2.2",
+    "vitest": "5.0.1"
+  }
+}

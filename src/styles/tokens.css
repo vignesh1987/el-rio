@@ -1,0 +1,123 @@
+/*
+ * Design tokens: every colour and font in the game is defined here.
+ *
+ * Layout concept: a hydrological survey sheet. A map of the basin sits on
+ * top; option cards and a readout panel sit below it.
+ *
+ * Colour roles
+ *   --bg, --surface, --ink, --muted, --rule, --track : neutrals (slightly green, like survey paper)
+ *   --river, --aquifer                                : water resources
+ *   --agri, --energy, --water                         : one colour per ministry
+ *   --land                                            : land use
+ *   --fail                                            : a broken limit or a missed target
+ */
+:root {
+  --bg: #edf2ef;
+  --surface: #ffffff;
+  --ink: #10302a;
+  --muted: #566d66;
+  --rule: #cad7d2;
+  --track: #e2e9e6;
+
+  --river: #3e8dc5;
+  --aquifer: #a9cbe3;
+  --aquifer-deep: #2a6a99;
+
+  --agri: #557f26;
+  --energy: #b87800;
+  --water: #19579c;
+  --land: #8b6b3f;
+  --fail: #c23b22;
+  --fail-soft: #f6dcd5;
+
+  /* Land mosaic tiles */
+  --tile-rainfed: #dbe7c6;
+  --tile-canal: #9cc46f;
+  --tile-tubewell: #5f8f2c;
+  --tile-drip: #3d6a1d;
+  --tile-solar: #e9bf4f;
+  --tile-reservoir: #86b8de;
+  --tile-free: #f4f7f5;
+
+  /* Mountains at the river source */
+  --rock: #a7b5ae;
+  --rock-shade: #8c9b94;
+  --rock-far: #c9d4ce;
+  --snow: #ffffff;
+  --pine: #4c7a3f;
+
+  --on-ink: #ffffff; /* text on an --ink background */
+
+  --display: "Archivo Variable", "Arial Narrow", Arial, sans-serif;
+  --body: "Public Sans Variable", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  --radius: 4px;
+  color-scheme: light;
+}
+
+/* Dark theme: same roles, redefined for a dark background. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1916;
+    --surface: #14231f;
+    --ink: #e2ece8;
+    --muted: #93a9a1;
+    --rule: #2a3d36;
+    --track: #20322c;
+    --river: #5aa6da;
+    --aquifer: #2c4d66;
+    --aquifer-deep: #8cc0e6;
+    --agri: #8dba55;
+    --energy: #e3a62b;
+    --water: #6fa6e6;
+    --land: #c29a62;
+    --fail: #f06a4f;
+    --fail-soft: #3d1f19;
+    --tile-rainfed: #3b4a2b;
+    --tile-canal: #5f7f3a;
+    --tile-tubewell: #7fa94a;
+    --tile-drip: #a7cf72;
+    --tile-solar: #b58d26;
+    --tile-reservoir: #3f7099;
+    --tile-free: #1a2b26;
+    --rock: #4d5f58;
+    --rock-shade: #3c4c46;
+    --rock-far: #2c3a35;
+    --snow: #dfe9e5;
+    --pine: #6f9b55;
+    --on-ink: #0d1916;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1916;
+  --surface: #14231f;
+  --ink: #e2ece8;
+  --muted: #93a9a1;
+  --rule: #2a3d36;
+  --track: #20322c;
+  --river: #5aa6da;
+  --aquifer: #2c4d66;
+  --aquifer-deep: #8cc0e6;
+  --agri: #8dba55;
+  --energy: #e3a62b;
+  --water: #6fa6e6;
+  --land: #c29a62;
+  --fail: #f06a4f;
+  --fail-soft: #3d1f19;
+  --tile-rainfed: #3b4a2b;
+  --tile-canal: #5f7f3a;
+  --tile-tubewell: #7fa94a;
+  --tile-drip: #a7cf72;
+  --tile-solar: #b58d26;
+  --tile-reservoir: #3f7099;
+  --tile-free: #1a2b26;
+  --rock: #4d5f58;
+  --rock-shade: #3c4c46;
+  --rock-far: #2c3a35;
+  --snow: #dfe9e5;
+  --pine: #6f9b55;
+  --on-ink: #0d1916;
+  color-scheme: dark;
+}
