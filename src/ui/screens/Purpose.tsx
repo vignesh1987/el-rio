@@ -50,9 +50,9 @@ function SiloDiagram() {
       <text x={337} y={106} text-anchor="middle" class="map-label" style={{ fill: "var(--ink)" }}>
         ONE AQUIFER · ONE GRID
       </text>
-      <text x={440} y={62} class="map-label">EACH MINISTERIAL PLAN ASSUMES</text>
-      <text x={440} y={80} class="map-label">"THE WHOLE RIVER</text>
-      <text x={440} y={98} class="map-label">IS MINE"</text>
+      <text x={440} y={62} class="map-label">EACH MINISTERIAL PLAN</text>
+      <text x={440} y={80} class="map-label">ASSUMES "THE WHOLE </text>
+      <text x={440} y={98} class="map-label">RIVER IS MINE"</text>
       <text x={440} y={132} style={{ font: "800 16px var(--display)", fill: "var(--ink)" }}>
         What happens
       </text>
@@ -68,7 +68,7 @@ export function Purpose({ onPlay }: PurposeProps) {
     <div class="purpose">
       <section class="purpose-hero">
         <p class="eyebrow">A 20-minute game for CENG60016 · Topic 8: Climate, land, energy and water</p>
-        <h1>Why do sensible sector plans waste shared resources?</h1>
+        <h1>When ministries plan in siloes, can shared resources run short?</h1>
         <p class="purpose-lede">You will plan for one ministry, watch the plans meet on one river, and then plan for the whole country.</p>
         <div class="btn-row">
           <button class="btn" type="button" onClick={onPlay}>
@@ -81,7 +81,7 @@ export function Purpose({ onPlay }: PurposeProps) {
       <div class="purpose-grid">
         <div class="stack">
           <section class="panel purpose-box">
-            <h2>The problem, in one picture</h2>
+            <h2>The planning problem, in one picture</h2>
             <SiloDiagram />
             <p class="muted">Farms, power stations and cities draw on the same river, aquifer and grid. Each ministry plans its own sector and is judged on its own target.</p>
           </section>
