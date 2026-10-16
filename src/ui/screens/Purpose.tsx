@@ -50,7 +50,7 @@ function SiloDiagram() {
       <text x={337} y={106} text-anchor="middle" class="map-label" style={{ fill: "var(--ink)" }}>
         ONE AQUIFER · ONE GRID
       </text>
-      <text x={440} y={62} class="map-label">EACH PLAN ASSUMES</text>
+      <text x={440} y={62} class="map-label">EACH MINISTERIAL PLAN ASSUMES</text>
       <text x={440} y={80} class="map-label">"THE WHOLE RIVER</text>
       <text x={440} y={98} class="map-label">IS MINE"</text>
       <text x={440} y={132} style={{ font: "800 16px var(--display)", fill: "var(--ink)" }}>
