@@ -2,7 +2,8 @@
  * The game controller: holds the game state and decides which screen to show.
  *
  * Screens, in order of play:
- *   landing -> round (one ministry, alone) -> reveal -> council -> debrief
+ *   purpose (why we play) -> landing (pick a ministry) -> round (one ministry, alone)
+ *   -> reveal -> council -> debrief
  * "assumptions" can be opened from any screen and returns to where it was.
  */
 import { useEffect, useMemo, useState } from "preact/hooks";
@@ -18,6 +19,7 @@ import { Council } from "./screens/Council.tsx";
 import { Debrief } from "./screens/Debrief.tsx";
 import { Landing } from "./screens/Landing.tsx";
 import { MinistryRound } from "./screens/MinistryRound.tsx";
+import { Purpose } from "./screens/Purpose.tsx";
 import { Reveal } from "./screens/Reveal.tsx";
 
 type Screen = Stage | "assumptions";
@@ -26,8 +28,8 @@ type Screen = Stage | "assumptions";
 const scenario = BASELINE;
 
 export function App() {
-  const [screen, setScreen] = useState<Screen>("landing");
-  const [returnTo, setReturnTo] = useState<Stage>("landing");
+  const [screen, setScreen] = useState<Screen>("purpose");
+  const [returnTo, setReturnTo] = useState<Stage>("purpose");
   const [player, setPlayer] = useState<MinistryId>("agriculture");
   const [ownPlan, setOwnPlan] = useState<Plan>({});
   const [revealStep, setRevealStep] = useState(0);
@@ -65,6 +67,9 @@ export function App() {
   // ---------------------------------------------------------------- Screen
   let body;
   switch (screen) {
+    case "purpose":
+      body = <Purpose onPlay={() => setScreen("landing")} />;
+      break;
     case "landing":
       body = <Landing scenario={scenario} onStart={start} onAssumptions={openAssumptions} />;
       break;
@@ -93,7 +98,7 @@ export function App() {
       );
       break;
     case "debrief":
-      body = <Debrief scenario={scenario} player={player} silo={siloOutcome} council={councilOutcome} reference={reference} hintsUsed={hintsUsed} onPlayAnother={start} onRevise={() => setScreen("council")} onHome={() => setScreen("landing")} />;
+      body = <Debrief scenario={scenario} player={player} silo={siloOutcome} council={councilOutcome} reference={reference} hintsUsed={hintsUsed} onPlayAnother={start} onRevise={() => setScreen("council")} onHome={() => setScreen("purpose")} />;
       break;
     case "assumptions":
       body = <Assumptions onBack={() => setScreen(returnTo)} />;
@@ -102,7 +107,7 @@ export function App() {
 
   return (
     <div class="page">
-      <Header stage={screen === "assumptions" ? returnTo : screen} onHome={() => setScreen("landing")} onAssumptions={openAssumptions} />
+      <Header stage={screen === "assumptions" ? returnTo : screen} onHome={() => setScreen("purpose")} onAssumptions={openAssumptions} />
       <main>{body}</main>
       <footer class="footer">
         <span>El Rio · a teaching game for CENG60016 Technologies to Combat Climate Change, Imperial College London.</span>

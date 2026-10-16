@@ -74,6 +74,10 @@ public/
   images/             Put your own photos here (see public/images/README.md)
 ```
 
+## Change the text
+
+See [`EDITING.md`](EDITING.md). It lists which file holds each piece of text and how to edit it safely.
+
 ## Change the numbers
 
 All numbers are in `src/data/baseline.ts`. Each coefficient has a comment that names its source or marks it as an ASSUMPTION.

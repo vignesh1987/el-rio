@@ -3,7 +3,7 @@
  * data and assumptions table.
  */
 
-export type Stage = "landing" | "round" | "reveal" | "council" | "debrief";
+export type Stage = "purpose" | "landing" | "round" | "reveal" | "council" | "debrief";
 
 const STAGES: { id: Stage; label: string }[] = [
   { id: "round", label: "1 · Your ministry" },
@@ -25,7 +25,7 @@ export function Header({ stage, onHome, onAssumptions }: HeaderProps) {
       <button class="brand" type="button" onClick={onHome} aria-label="El Rio: back to the start page">
         El Rio
       </button>
-      {stage !== "landing" && (
+      {stage !== "landing" && stage !== "purpose" && (
         <nav class="progress" aria-label="Game progress">
           {STAGES.map((s, i) => (
             <span key={s.id} class={i === current ? "on" : i < current ? "done" : ""} aria-current={i === current ? "step" : undefined}>
