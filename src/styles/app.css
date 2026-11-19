@@ -482,7 +482,8 @@ details.lecturers ul {
   font: 700 16px var(--body);
 }
 .option-top .count {
-  font: 600 22px var(--mono);
+  font: 600 18px var(--mono);
+  text-align: right;
 }
 .option .summary {
   font-size: 13.5px;
@@ -963,5 +964,109 @@ details.lecturers ul {
   .case-row {
     grid-template-columns: minmax(0, 1fr);
     gap: 2px;
+  }
+}
+
+/* ------------------------------------------------------------------ Front page demo (NexusDemo.tsx) */
+.nexus-demo {
+  padding: 16px 18px 18px;
+}
+.demo-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.demo-group {
+  display: grid;
+  gap: 12px;
+}
+.demo-group h3 {
+  font-size: 16px;
+  font-stretch: 108%;
+  color: var(--accent);
+}
+.demo-lever {
+  display: grid;
+  gap: 6px;
+}
+.demo-lever label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 14.5px;
+}
+.demo-lever label b {
+  font-size: 15px;
+}
+.demo-energy {
+  align-items: flex-start;
+  font-size: 14px;
+  padding: 10px 12px;
+  border-left: 4px solid var(--accent);
+  background: var(--track);
+  border-radius: var(--radius);
+  color: var(--ink);
+}
+.demo-energy i {
+  flex: none;
+  margin-top: 5px;
+}
+.gauge {
+  display: grid;
+  gap: 6px;
+  --gauge: var(--agri);
+}
+.gauge.warn {
+  --gauge: var(--energy);
+}
+.gauge.bad {
+  --gauge: var(--fail);
+}
+.gauge-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 14.5px;
+}
+.gauge-top b {
+  font: 600 20px var(--mono);
+  color: var(--gauge);
+  transition: color 0.3s;
+}
+.gauge-bar {
+  height: 12px;
+  border-radius: 99px;
+  background: var(--track);
+  overflow: hidden;
+}
+.gauge-bar i {
+  display: block;
+  height: 100%;
+  background: var(--gauge);
+  transition: width 0.3s, background 0.3s;
+}
+.gauge-note {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.demo-happened {
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  font-size: 14.5px;
+  min-height: 5.5em;
+}
+.demo-happened ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+@media (max-width: 960px) {
+  .demo-cols {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

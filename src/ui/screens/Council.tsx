@@ -22,6 +22,7 @@ import { OptionCard } from "../components/OptionCard.tsx";
 import { RiverMap } from "../components/RiverMap.tsx";
 import { money } from "../format.ts";
 import { hintFor, MINISTRIES, ministryColour } from "../game.ts";
+import { hintText } from "../units.ts";
 
 interface CouncilProps {
   scenario: Scenario;
@@ -124,7 +125,7 @@ export function Council({ scenario, plan, outcome, onChange, onReset, onSubmit, 
               {lastHint ? (
                 <>
                   <b>
-                    Hint {hintsUsed}: {lastHint.optionName} {lastHint.from} → {lastHint.to}
+                    Hint {hintsUsed}: {hintText(scenario, lastHint)}
                   </b>
                   <span>{lastHint.reason}</span>
                 </>

@@ -4,6 +4,7 @@
  * Screens, in order of play:
  *   purpose (why we play) -> landing (pick a ministry) -> round (one ministry, alone)
  *   -> reveal -> council -> debrief
+ * "express" is the 8-minute version. It runs entirely inside <Express> (src/ui/express/).
  * "assumptions" can be opened from any screen and returns to where it was.
  */
 import { useEffect, useMemo, useState } from "preact/hooks";
@@ -16,6 +17,7 @@ import { Header, type Stage } from "./components/Header.tsx";
 import { colleaguePlan } from "./game.ts";
 import { Assumptions } from "./screens/Assumptions.tsx";
 import { Council } from "./screens/Council.tsx";
+import { Express } from "./express/Express.tsx";
 import { Debrief } from "./screens/Debrief.tsx";
 import { Landing } from "./screens/Landing.tsx";
 import { MinistryRound } from "./screens/MinistryRound.tsx";
@@ -68,7 +70,10 @@ export function App() {
   let body;
   switch (screen) {
     case "purpose":
-      body = <Purpose onPlay={() => setScreen("landing")} />;
+      body = <Purpose scenario={scenario} onPlay={() => setScreen("landing")} onQuick={() => setScreen("express")} />;
+      break;
+    case "express":
+      body = <Express scenario={scenario} onFullGame={() => setScreen("landing")} onHome={() => setScreen("purpose")} />;
       break;
     case "landing":
       body = <Landing scenario={scenario} onStart={start} onAssumptions={openAssumptions} />;

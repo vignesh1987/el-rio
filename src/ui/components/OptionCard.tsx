@@ -1,5 +1,5 @@
 /**
- * One option card: name, summary, a slider for the number of blocks,
+ * One option card: name, summary, a slider (stepping by one block, shown as one number in the final unit),
  * and a line of effects that updates as the slider moves.
  *
  * In the silo round ("silo" mode) the card hides electricity that another
@@ -7,6 +7,7 @@
  */
 import { fmt, money } from "../format.ts";
 import type { Option } from "../../model/types.ts";
+import { quantity } from "../units.ts";
 
 interface OptionCardProps {
   option: Option;
@@ -39,11 +40,11 @@ export function OptionCard({ option, blocks, onChange, mode }: OptionCardProps) 
     <div class="option panel">
       <div class="option-top">
         <b id={`${id}-name`}>{option.name}</b>
-        <span class="count">{blocks}</span>
+        <span class="count">{quantity(option, blocks)}</span>
       </div>
       <p class="summary">{option.summary}</p>
       <div class="slider-row">
-        <button class="step-btn" type="button" onClick={() => set(blocks - 1)} aria-label={`Remove one block of ${option.name}`}>
+        <button class="step-btn" type="button" onClick={() => set(blocks - 1)} aria-label={`Less ${option.name}`}>
           −
         </button>
         <input
@@ -56,12 +57,12 @@ export function OptionCard({ option, blocks, onChange, mode }: OptionCardProps) 
           aria-labelledby={`${id}-name`}
           onInput={(ev) => set(Number((ev.target as HTMLInputElement).value))}
         />
-        <button class="step-btn" type="button" onClick={() => set(blocks + 1)} aria-label={`Add one block of ${option.name}`}>
+        <button class="step-btn" type="button" onClick={() => set(blocks + 1)} aria-label={`More ${option.name}`}>
           +
         </button>
       </div>
       <div class="block">
-        1 block = {option.blockLabel} · max {option.maxBlocks}
+        max {quantity(option, option.maxBlocks, true)}
       </div>
       <div class="effects">
         {effects.map(([k, v]) => (

@@ -8,6 +8,7 @@ import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/600.css";
 import "./styles/tokens.css";
 import "./styles/app.css";
+import "./styles/express.css";
 
 import { render } from "preact";
 import { App } from "./ui/App.tsx";

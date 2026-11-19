@@ -17,6 +17,7 @@ import { Meter } from "../components/Meter.tsx";
 import { RiverMap } from "../components/RiverMap.tsx";
 import { fmt, money, pct } from "../format.ts";
 import { hintFor, MINISTRIES, playerContribution, shortName } from "../game.ts";
+import { describeQuantities } from "../units.ts";
 
 interface RevealProps {
   scenario: Scenario;
@@ -31,12 +32,9 @@ interface RevealProps {
 
 export const REVEAL_STEPS = 5;
 
-/** A short description of one ministry's plan, e.g. "12 canal, 3 tube well". */
+/** A short description of one ministry's plan, e.g. "Canal irrigation 1.2 Mha, Tube-well irrigation 0.3 Mha". */
 function describe(scenario: Scenario, ministry: MinistryId, plan: Plan): string {
-  return scenario.options
-    .filter((o) => o.ministry === ministry && (plan[o.id] ?? 0) > 0)
-    .map((o) => `${plan[o.id]} × ${o.name.toLowerCase()}`)
-    .join(", ");
+  return describeQuantities(scenario.options.filter((o) => o.ministry === ministry), plan);
 }
 
 export function Reveal({ scenario, player, plan, outcome: o, step, onStep, onCouncil }: RevealProps) {

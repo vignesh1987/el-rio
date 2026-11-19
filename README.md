@@ -60,6 +60,7 @@ src/
     App.tsx           Game state and screen order
     game.ts           Text and numbers prepared for the screens
     screens/          Landing, MinistryRound, Reveal, Council, Debrief, Assumptions
+    express/          Quick play: plan cards, run the year, fix the basin, score card
     components/       RiverMap, GridMap, LandMap, OptionCard, Meter, Header, Icons
   styles/
     tokens.css        Colours and fonts (light and dark themes)
@@ -100,6 +101,18 @@ If a test fails, the game no longer teaches its lesson with your numbers.
 ## Model in one paragraph
 
 Farms and cities take water from the river above the dams, so hydropower output scales with the flow that is left (`flow at dams / natural flow`). Tube wells, drip lines, city wells, treatment plants and desalination use electricity that the Ministry of Energy did not forecast. If generation falls short, every user gets the same share of the power it needs, and pumped farms fall back to rain-fed yields. Pumping more than the aquifer's recharge lowers the water table. Land, the environmental flow to the delta and a power-sector CO₂ cap are also checked. The model covers one average year, with no seasons, droughts, return flows or trade.
+
+## Quick play (about 8 minutes)
+
+The front page opens two versions of the game. Both use the same model and numbers.
+
+1. **Pick a ministry.** The computer plays the other two.
+2. **Pick one of three plan cards** within 2.5 minutes (the clock only sets a speed bonus). The cheapest card earns three stars. It is the plan a silo ministry would submit.
+3. **Run the year.** The three plans combine and the failure plays out: water, then power, then food and taps. Each failed area breaks one of three hearts.
+4. **Fix the basin** as the Nexus Council. It plays like golf: *par* is the number of options the cheapest working plan changes, and each hint costs 75 points. Two buttons, *Show the best solution* and *Show the second-best solution*, move every slider to the cheapest and the next-cheapest working plan. Showing a solution costs 300 points, once, and removes the three solving badges.
+5. **Score card.** Up to 1,000 points, a rank and five badges. There is no class leaderboard and no data is collected.
+
+The plan cards are in `src/data/express.ts`. The scoring rules are in `src/model/express.ts`. The screens are in `src/ui/express/`. `tests/express.test.ts` checks that every card passes its own ministry's checks and that the combined plan always breaks the basin.
 
 ## Roadmap: climate version
 

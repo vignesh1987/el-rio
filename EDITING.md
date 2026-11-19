@@ -8,7 +8,11 @@ Open the folder in VS Code and press **Ctrl+Shift+F** (search all files). Type a
 
 | What you see | File | Look for |
 | --- | --- | --- |
-| Front page (why we play, figures, Punjab and Haryana, take-away messages) | `src/ui/screens/Purpose.tsx` | `LINKS`, `It happens in real basins`, `Take-away messages` |
+| Front page (title, buttons, figures, what you will do) | `src/ui/screens/Purpose.tsx` | `LINKS`, `What you will do` |
+| Front page "Try the planning problem" demo (slider names, gauges, explanations) | `src/ui/components/NexusDemo.tsx` | `LEVERS`, `whatHappened` |
+| Quick play plan cards (names, one-line pitches, the blocks each card builds) | `src/data/express.ts` | `PLAN_CARDS`, `pitch:` |
+| Quick play screens (Run the year, Fix the basin, score card) | `src/ui/express/` | `RunYear.tsx`, `FixIt.tsx`, `ScoreCard.tsx` |
+| Quick play points, ranks and badges | `src/model/express.ts` | `rankFor`, `badgesFor` |
 | Game page (map captions, ministry cards, how it works, lecturer notes) | `src/ui/screens/Landing.tsx` | `ZONE_TEXT`, `MINISTRY_ROLE`, `For lecturers` |
 | Ministry briefs, targets, option names and summaries, hint texts | `src/data/baseline.ts` | `brief:`, `targetLabel:`, `summary:`, `hintMore:`, `hintLess:` |
 | All numbers in the model (limits, targets, costs, yields) | `src/data/baseline.ts` | `targets:`, `limits:`, `COEFFICIENTS` |

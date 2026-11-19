@@ -1,0 +1,342 @@
+/*
+ * Express mode (src/ui/express/). Same tokens as the rest of the game:
+ * no colour or font is defined here, so light and dark themes both work.
+ */
+
+/* ------------------------------------------------------------------ Hearts */
+.hearts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+.heart {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 700 14px var(--body);
+}
+.heart i {
+  font-style: normal;
+  font-size: 26px;
+  line-height: 1;
+}
+.heart.ok i {
+  color: var(--fail);
+}
+.heart.ok {
+  color: var(--ink);
+}
+.heart.broken {
+  color: var(--muted);
+}
+.heart.broken i {
+  color: var(--muted);
+}
+.heart.unknown {
+  opacity: 0.4;
+}
+.hearts.large .heart {
+  font-size: 17px;
+}
+.hearts.large .heart i {
+  font-size: 44px;
+}
+
+/* ------------------------------------------------------------------ Plan cards and clock */
+.xhud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+.xhud p {
+  max-width: 56ch;
+}
+.clock {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 99px;
+  background: var(--ink);
+  color: var(--on-ink);
+}
+.clock-n {
+  font: 600 28px/1 var(--mono);
+  font-variant-numeric: tabular-nums;
+  min-width: 4ch;
+  text-align: right;
+}
+.clock-l {
+  font: 600 13px var(--body);
+}
+.clock.done {
+  background: var(--track);
+  color: var(--muted);
+}
+.xcards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.xcard {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 18px;
+  border-top: 5px solid var(--accent);
+}
+.xcard h2 {
+  font-size: 21px;
+  font-stretch: 112%;
+  color: var(--accent);
+}
+.xblocks {
+  font: 500 13px var(--mono);
+  color: var(--ink);
+}
+.xfacts {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid var(--rule);
+  padding-top: 10px;
+}
+.xfacts b {
+  font-size: 22px;
+}
+.xpass {
+  font-size: 13px;
+  color: var(--muted);
+}
+.xsealed {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  align-items: center;
+}
+
+/* ------------------------------------------------------------------ Run the year */
+.xrun {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}
+.btn.xbig {
+  padding: 16px 28px;
+  font-size: 18px;
+}
+.dominoes {
+  display: grid;
+  gap: 12px;
+}
+.domino {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--rule);
+  border-left: 6px solid var(--river);
+  background: var(--surface);
+}
+.domino.broken {
+  border-left-color: var(--fail);
+  background: var(--fail-soft);
+}
+.domino h2 {
+  font-size: 22px;
+  font-stretch: 112%;
+  margin-bottom: 4px;
+}
+.domino p {
+  font-size: 15px;
+}
+.domino-heart {
+  font-size: 40px;
+  line-height: 1;
+  color: var(--fail);
+}
+.domino.broken .domino-heart {
+  color: var(--muted);
+}
+.xverdict {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  padding: 20px 22px;
+}
+.xverdict h2 {
+  font-size: clamp(26px, 4vw, 34px);
+  font-stretch: 115%;
+}
+.xverdict h3 {
+  font-size: 16px;
+}
+.xverdict ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+/* ------------------------------------------------------------------ Fix the basin */
+.xhud-fix {
+  /* Stays on screen while the sliders move, so the hearts and points are always visible. */
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 12px 16px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.xchips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.xchip {
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: var(--track);
+  font: 600 13px var(--body);
+}
+.xchip b {
+  font-size: 15px;
+}
+.xchip.over {
+  background: var(--fail-soft);
+  color: var(--fail);
+}
+.xchip.pts {
+  background: var(--ink);
+  color: var(--on-ink);
+}
+.xsolutions {
+  display: grid;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+}
+.levers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 10px;
+}
+.lever {
+  padding: 12px 14px;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+.lever.changed {
+  border-color: var(--accent);
+  box-shadow: inset 4px 0 0 var(--accent);
+}
+.lever .count small {
+  display: block;
+  font: 500 12px var(--mono);
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ Score card */
+.xscore {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  padding: 22px 24px;
+}
+.xscore h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  font-stretch: 118%;
+}
+.xtotal {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.xtotal b {
+  font-size: clamp(52px, 10vw, 88px);
+  line-height: 1;
+}
+.xtotal span {
+  font: 600 18px var(--mono);
+  color: var(--muted);
+}
+.xtwo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+.xsum td {
+  font-weight: 800;
+  border-bottom: none;
+}
+.xbadges {
+  padding: 16px 18px;
+  display: grid;
+  gap: 10px;
+}
+.xbadges h2,
+.xcompare h2 {
+  font-size: 20px;
+  font-stretch: 112%;
+}
+.xbadges ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.xbadges li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: start;
+  color: var(--muted);
+}
+.xbadges li > span {
+  font-size: 22px;
+  line-height: 1.1;
+}
+.xbadges li div {
+  display: grid;
+  font-size: 14px;
+}
+.xbadges li.earned {
+  color: var(--ink);
+}
+.xbadges li.earned > span {
+  color: var(--energy);
+}
+.xcompare {
+  padding: 16px 18px;
+  display: grid;
+  gap: 12px;
+}
+.xcols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.xcols > div {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  font-size: 14px;
+}
+
+/* ------------------------------------------------------------------ Narrow screens */
+@media (max-width: 960px) {
+  .xcards,
+  .xtwo,
+  .xcols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

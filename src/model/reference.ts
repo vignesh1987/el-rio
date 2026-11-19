@@ -57,7 +57,11 @@ function energyPlanWorks(scenario: Scenario, demand: DemandSide, supply: SupplyS
   );
 }
 
-export function findReferencePlan(scenario: Scenario): ReferenceResult | null {
+/**
+ * The `count` cheapest distinct plans that pass every check, cheapest first.
+ * findReferencePlan() is the first of them. Express mode shows the best two.
+ */
+export function findBestPlans(scenario: Scenario, count: number): ReferenceResult[] {
   const { targets, limits } = scenario;
   const riverAllocatable = limits.riverNaturalFlowBcm - limits.environmentalFlowBcm;
   const smallestFoodBlock = Math.min(
@@ -102,8 +106,9 @@ export function findReferencePlan(scenario: Scenario): ReferenceResult | null {
   });
   energyPlans.sort((a, b) => a.cost - b.cost);
 
-  let bestCost = Infinity;
-  let bestPlan: Plan | null = null;
+  // The cheapest working plans found so far, cheapest first (at most `count`).
+  const best: { cost: number; plan: Plan }[] = [];
+  const worstKept = () => (best.length < count ? Infinity : best[count - 1].cost);
   for (const farm of farmPlans) {
     for (const water of waterPlans) {
       const both = mergePlans(farm, water);
@@ -116,17 +121,24 @@ export function findReferencePlan(scenario: Scenario): ReferenceResult | null {
       if (demand.riverBcm > riverAllocatable + 1e-9) continue;
       const baseCost = sumEffect(scenario, both, "costMUSD");
 
+      let found = 0;
       for (const supply of energyPlans) {
-        if (baseCost + supply.cost >= bestCost) break; // cannot beat the best so far
+        if (baseCost + supply.cost >= worstKept()) break; // cannot make the list
         if (energyPlanWorks(scenario, demand, supply)) {
-          bestCost = baseCost + supply.cost;
-          bestPlan = mergePlans(both, supply.plan);
-          break; // energy plans are sorted, so this is the cheapest for this pair
+          best.push({ cost: baseCost + supply.cost, plan: mergePlans(both, supply.plan) });
+          best.sort((x, y) => x.cost - y.cost);
+          if (best.length > count) best.pop();
+          // Energy plans are sorted, so a pair needs at most `count` of them.
+          if (++found >= count) break;
         }
       }
     }
   }
 
-  if (!bestPlan) return null;
-  return { plan: bestPlan, outcome: simulate(scenario, bestPlan) };
+  return best.map((b) => ({ plan: b.plan, outcome: simulate(scenario, b.plan) }));
+}
+
+/** The cheapest plan that passes every check, or null if none exists. */
+export function findReferencePlan(scenario: Scenario): ReferenceResult | null {
+  return findBestPlans(scenario, 1)[0] ?? null;
 }

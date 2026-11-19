@@ -3,17 +3,16 @@
  *
  * Sections, top to bottom:
  *   1. Hero with an interactive map of the basin (hover or tap a zone).
- *   2. "Try the nexus": one slider shows irrigation starving the dams.
- *   3. Pick a ministry (or get one at random).
- *   4. How the game works.
- *   5. Notes for lecturers.
+ *   2. Pick a ministry (or get one at random).
+ *   3. How the game works.
+ *   4. Notes for lecturers.
+ * The "Try the nexus" demo now lives on the front page (Purpose.tsx, NexusDemo.tsx).
  */
 import { useMemo, useState } from "preact/hooks";
 import { simulate } from "../../model/simulate.ts";
 import type { MinistryId, Plan, Scenario } from "../../model/types.ts";
 import { MINISTRY_ICONS } from "../components/Icons.tsx";
 import { RiverMap, type RiverZone } from "../components/RiverMap.tsx";
-import { fmt } from "../format.ts";
 import { MINISTRIES, ministryColour, randomMinistry } from "../game.ts";
 
 interface LandingProps {
@@ -42,16 +41,8 @@ const MINISTRY_ROLE: Record<MinistryId, string> = {
 
 export function Landing({ scenario, onStart, onAssumptions }: LandingProps) {
   const [zone, setZone] = useState<RiverZone | null>(null);
-  const [irrigated, setIrrigated] = useState(4);
 
   const heroOutcome = useMemo(() => simulate(scenario, HERO_PLAN), [scenario]);
-
-  // Demo: three dams, plus canal irrigation upstream set by the slider.
-  const demoPlan: Plan = { hydro: 3, canal: irrigated };
-  const demo = simulate(scenario, demoPlan);
-  const hydroRated = 12;
-  const hydroNow = demo.generationBySource.hydro ?? 0;
-  const lit = Math.round((hydroNow / hydroRated) * 10);
 
   const caption = zone ? ZONE_TEXT[zone] : null;
 
@@ -90,41 +81,7 @@ export function Landing({ scenario, onStart, onAssumptions }: LandingProps) {
         </p>
       </section>
 
-      {/* 2. Try the nexus */}
-      <section class="section">
-        <h2>Try the nexus in ten seconds</h2>
-        <p class="section-intro">Utopia's three dams sit downstream of the farm plain. Move the slider to irrigate more farmland from the river and watch the dams.</p>
-        <div class="panel demo">
-          <RiverMap scenario={scenario} plan={demoPlan} outcome={demo} />
-          <div class="demo-readout">
-            <div class="stack" style={{ "--gap": "8px" }}>
-              <label for="demo-irrigation" class="eyebrow">
-                Canal-irrigated farmland
-              </label>
-              <div class="big">{fmt(irrigated * 0.1)} Mha</div>
-              <input id="demo-irrigation" type="range" min={0} max={15} step={1} value={irrigated} onInput={(e) => setIrrigated(Number((e.target as HTMLInputElement).value))} style={{ accentColor: "var(--agri)", width: "100%" }} />
-            </div>
-            <div class="stack" style={{ "--gap": "8px" }}>
-            <div class="stat">
-              <span class="muted">Dams generate</span>
-              <b>
-                {fmt(hydroNow)} of {hydroRated} TWh
-              </b>
-            </div>
-            <div class="lights" aria-label={`${lit} of 10 city lights on`}>
-              {Array.from({ length: 10 }, (_, i) => (
-                <i key={i} class={i < lit ? "" : "off"} />
-              ))}
-            </div>
-            </div>
-            <p class="muted" style={{ fontSize: "14px" }}>
-              Each 100,000 ha of canals takes 0.8 billion m³ a year. That water never reaches the turbines.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Pick a ministry */}
+      {/* 2. Pick a ministry */}
       <section class="section" id="ministries">
         <h2>Pick your ministry</h2>
         <p class="section-intro">You plan for one ministry. Two colleagues plan the other two at the same time. Nobody sees the others' plans.</p>
@@ -154,7 +111,7 @@ export function Landing({ scenario, onStart, onAssumptions }: LandingProps) {
         </div>
       </section>
 
-      {/* 4. How it works */}
+      {/* 3. How it works */}
       <section class="section">
         <h2>How the game works</h2>
         <ol class="steps">
@@ -176,7 +133,7 @@ export function Landing({ scenario, onStart, onAssumptions }: LandingProps) {
         </ol>
       </section>
 
-      {/* 5. Lecturers */}
+      {/* 4. Lecturers */}
       <section class="section">
         <details class="lecturers panel">
           <summary>For lecturers: running the game in class</summary>
